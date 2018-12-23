@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'Header/me_header.dart';
+import 'Cell/me_cell.dart';
 
 class MeRoute extends StatefulWidget {
   @override
@@ -6,12 +8,45 @@ class MeRoute extends StatefulWidget {
 }
 
 class _MeRouteState extends State<MeRoute> {
+  ScrollController _scrollController;
+  double elevation = 0.0; // 0 | 0.6
+  // list
+  final Map<String, MeCellConfig> listTitles1 = {
+    "我的积分": null,
+    "知识大使":
+        MeCellConfig(type: MeCellType.Url, urlTitle: "分享赚钱"), //Text("分享赚钱"),
+    "我的收听偏好": null,
+  };
+  final Map<String, MeCellConfig> listTitles2 = {
+    "扫一扫": null,
+    "知识大使": MeCellConfig(type: MeCellType.Switch),
+  };
+  final Map<String, MeCellConfig> listTitles3 = {
+    "金融专区": MeCellConfig(type: MeCellType.Url, urlTitle: "各种权益免费领"),
+    "运营商服务": null,
+    "商城": null,
+    "推荐喜马拉雅给好友": MeCellConfig(type: MeCellType.Url, urlTitle: "领20元优惠券"),
+    "帮助与反馈": null,
+  };
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController = ScrollController();
+    _scrollController.addListener(() {
+      // 控制AppBar底部横线是否显示
+      setState(() {
+        elevation = _scrollController.offset <= 0 ? 0 : 0.6;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        elevation: 0, // 去除底部阴影
-        backgroundColor: Colors.white,
+        elevation: elevation, // 底部阴影
+        backgroundColor: Color(0xFFFAFAFA),
         actions: <Widget>[
           Padding(
             padding: const EdgeInsets.only(right: 15.0),
@@ -44,128 +79,60 @@ class _MeRouteState extends State<MeRoute> {
         ],
       ),
       body: CustomScrollView(
+        controller: _scrollController,
         slivers: <Widget>[
           SliverPadding(
-            padding: EdgeInsets.all(10.0),
+            padding: EdgeInsets.symmetric(vertical: 10.0),
             sliver: SliverToBoxAdapter(
               child: Container(
                 // decoration: BoxDecoration(color: Colors.yellow),
-                child: Column(
-                  children: <Widget>[
-                    // 用户信息
-                    Padding(
-                      padding: EdgeInsets.symmetric(vertical: 10.0),
-                      child: Row(
-                        children: <Widget>[
-                          CircleAvatar(
-                              child: Image.asset(
-                                'images/me/host_default_avatar_88.png',
-                              ),
-                              radius: 30.0),
-                          Container(
-                            width: 10.0,
-                          ),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Text(
-                                  '点击登录',
-                                  style: TextStyle(
-                                      fontSize: 16.0,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                Container(
-                                  height: 5.0,
-                                ),
-                                Text(
-                                  '登录后数据不丢失',
-                                  style: TextStyle(
-                                      color: Color(0xFFA0A0A0),
-                                      fontSize: 13.0,
-                                      fontWeight: FontWeight.bold),
-                                )
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    // VIP
-                    Padding(
-                      padding: EdgeInsets.only(bottom: 10.0),
-                      child: DecoratedBox(
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: [Color(0xFFF1BC7F), Color(0xFFFFD39E)],
-                          ),
-                          borderRadius: BorderRadius.circular(4.0),
-                        ),
-                        child: Container(
-                          height: 50.0,
-                        ),
-                      ),
-                    ),
-
-                    // 钱包
-                    Padding(
-                      padding: EdgeInsets.only(bottom: 10.0),
-                      child: DecoratedBox(
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(4.0),
-                          boxShadow: [BoxShadow(color: Color(0xFFF3F3F3), blurRadius: 15.0, offset: Offset(0, 8.0))]
-                        ),
-                        child: Container(
-                          height: 100.0,
-                          child: Row(
-                            children: <Widget>[
-                              Expanded(child: Icon(Icons.arrow_upward),),
-                              Expanded(child: Icon(Icons.arrow_back),),
-                              Expanded(child: Icon(Icons.arrow_downward),),
-                              Expanded(child: Icon(Icons.arrow_forward),),                              
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    // 功能
-                    Padding(
-                      padding: EdgeInsets.only(bottom: 10.0),
-                      child: DecoratedBox(
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(4.0),
-                          boxShadow: [BoxShadow(color: Color(0xFFF3F3F3), blurRadius: 15.0, offset: Offset(0, 8.0))]
-                        ),
-                        child: Container(
-                          height: 100.0,
-                          child: Row(
-                            children: <Widget>[
-                              Expanded(child: Icon(Icons.arrow_upward),),
-                              Expanded(child: Icon(Icons.arrow_back),),
-                              Expanded(child: Icon(Icons.arrow_downward),),
-                              Expanded(child: Icon(Icons.arrow_forward),),                              
-                            ],
-                          ),
-                        ),
-                      ),
-                    )
-                  ],
-                ),
+                child: MeHeader(),
               ),
             ),
           ),
-          SliverFixedExtentList(
-            itemExtent: 50.0,
-            delegate: SliverChildBuilderDelegate((context, index) {
-              return Container(
-                color: Colors.redAccent,
-                child: Text("$index"),
-              );
-            }, childCount: 50),
-          )
+          createSliverList(listTitles1),
+          createLineBlock(),
+          createSliverList(listTitles2),
+          createLineBlock(),
+          createSliverList(listTitles3),
         ],
+      ),
+    );
+  }
+
+  // 创建list
+  Widget createSliverList(Map<String, MeCellConfig> datas) {
+    return SliverFixedExtentList(
+      itemExtent: 50.0, // 行高
+      delegate: SliverChildBuilderDelegate((context, index) {
+        return Container(
+          // color: Colors.redAccent,
+          child: Padding(
+            padding: const EdgeInsets.only(left: 10.0),
+            child: Column(
+              children: <Widget>[
+                Expanded(
+                  child: MeCell(
+                    title: datas.keys.toList()[index],
+                    config: datas.values.toList()[index],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      }, childCount: datas.values.length),
+    );
+  }
+
+  // 创建list的底部行块
+  Widget createLineBlock() {
+    return SliverToBoxAdapter(
+      child: Container(
+        decoration: BoxDecoration(color: Color(0xFFF3F4F5)),
+        child: Container(
+          height: 8.0,
+        ),
       ),
     );
   }
