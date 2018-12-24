@@ -12,7 +12,9 @@ class LXFTabBar extends StatefulWidget {
     this.backgroundColor = Colors.white,
     this.itemSpacing = .0,
     this.onTap,
-  }): assert(0 <= currentIndex && currentIndex < items.length);
+  }): 
+    assert(0 <= currentIndex && currentIndex < items.length),
+    super(key: key);
 
   /// 当前选中的下标
   final int currentIndex;
