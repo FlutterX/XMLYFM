@@ -48,15 +48,13 @@ class _MainAppState extends State<MainApp> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    // final double additionalBottomPadding = math.max(MediaQuery.of(context).padding.bottom - _kBottomMargin, 0.0);
-
     return MaterialApp(
       title: '喜马拉雅FM APP',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
       home: Scaffold(
-          body: _bodys[_tabIndex],
+          body: _bodys.elementAt(_tabIndex),
           bottomNavigationBar: LXFTabBar(
             currentIndex: _tabIndex,
             items: _tabImages
@@ -70,6 +68,7 @@ class _MainAppState extends State<MainApp> with SingleTickerProviderStateMixin {
                 .values
                 .toList(),
             onTap: (index) {
+              if (index == 2) return;
               setState(() {
                 _tabIndex = index;
               });
