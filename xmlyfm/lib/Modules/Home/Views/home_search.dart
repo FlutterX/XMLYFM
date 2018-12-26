@@ -4,7 +4,7 @@ class HomeSearch extends StatelessWidget {
   @override
     Widget build(BuildContext context) {
       return Padding(
-        padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
+        padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
         child: Row(
         children: <Widget>[
           Expanded(
@@ -24,7 +24,7 @@ class HomeSearch extends StatelessWidget {
                 ],
               ),
             ),),
-          Padding(padding: EdgeInsets.only(left: 8.0), child: Icon(Icons.history, color: Colors.white, size: 30.0,),),
+          Padding(padding: EdgeInsets.only(left: 10.0), child: Icon(Icons.history, color: Colors.white, size: 30.0,),),
           Padding(padding: EdgeInsets.only(left: 8.0), child: Icon(Icons.add, color: Colors.white, size: 30.0,),)
         ],
       ),
