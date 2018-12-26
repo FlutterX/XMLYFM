@@ -45,6 +45,7 @@ class _MeRouteState extends State<MeRoute> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        brightness: Brightness.light,
         elevation: elevation, // 底部阴影
         backgroundColor: Color(0xFFFAFAFA),
         actions: <Widget>[
