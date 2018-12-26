@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:xmlyfm/Configs/configs.dart';
 
 class DetailRefresh extends StatelessWidget {
   @override
     Widget build(BuildContext context) {
       return Container(
             height: 70.0,
-            color: Colors.white,
             child: Center(
               child: Container(
                 width: 90.0,
@@ -20,9 +20,9 @@ class DetailRefresh extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Icon(Icons.refresh),
+                    Icon(Icons.refresh, color: themeColor,),
                     Container(width: 5.0,),
-                    Text('换一批')
+                    Text('换一批', style: TextStyle(fontWeight: FontWeight.bold),)
                   ],
                 ),
               ),
