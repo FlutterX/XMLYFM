@@ -15,6 +15,8 @@ class _HomeRouteState extends State<HomeRoute>
     with SingleTickerProviderStateMixin {
   List<HomeCategoryItem> categoryModelList = [];
   TabController _tabController;
+  int _tabBarBgAlpha = 255;
+  bool _isTabBarOverAlpha = false;
 
   @override
   void initState() {
@@ -23,17 +25,23 @@ class _HomeRouteState extends State<HomeRoute>
   }
 
   @override
+    void dispose() {
+      _tabController.dispose();
+      super.dispose();
+    }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Stack(
-      fit: StackFit.expand,
+      body: Stack( fit: StackFit.expand,
       children: <Widget>[
         Positioned(
             left: .0,
             right: .0,
             // height: 100.0,
             child: Container(
-              color: Colors.red,
+              // color: Colors.red,
+              color: Colors.white,
               height: 260.0 + kTextTabBarHeight,
             )),
         Positioned(
@@ -41,7 +49,8 @@ class _HomeRouteState extends State<HomeRoute>
             right: .0,
             height: kTextTabBarHeight + 200.0,
             child: Container(
-              color: Colors.blue,
+              // color: Colors.blue,
+              color: Color(0xFFB1A383).withAlpha(_tabBarBgAlpha),
             ),
         ),
         Positioned(
@@ -51,7 +60,7 @@ class _HomeRouteState extends State<HomeRoute>
                 padding: EdgeInsets.only(top: kTextTabBarHeight),
                 child: Container(
                   height: 50.0,
-                  decoration: BoxDecoration(color: Colors.red),
+                  decoration: BoxDecoration(color: Colors.transparent),
                   child: Row(
                     children: _tabController == null
                         ? []
@@ -60,14 +69,14 @@ class _HomeRouteState extends State<HomeRoute>
                               child: TabBar(
                                 controller: _tabController,
                                 isScrollable: true,
-                                indicatorColor: Colors.white,
+                                indicatorColor: _isTabBarOverAlpha ? Colors.black : Colors.white,
                                 indicatorSize: TabBarIndicatorSize.label,
                                 labelStyle: TextStyle(
-                                    color: Colors.white,
+                                    color: _isTabBarOverAlpha ? Colors.black : Colors.white,
                                     fontSize: 20.0,
                                     fontWeight: FontWeight.bold),
                                 unselectedLabelStyle: TextStyle(
-                                    color: Color(0xFFF9F9F9), fontSize: 13.0),
+                                    color: _isTabBarOverAlpha ? Colors.black : Color(0xFFF9F9F9), fontSize: 13.0),
                                 tabs: categoryModelList.map((model) {
                                   return Tab(
                                     text: model.title,
@@ -115,7 +124,6 @@ class _HomeRouteState extends State<HomeRoute>
       models.add(HomeCategoryItem.fromJson(categoryList[i]));
     }
     setState(() {
-      print(models.length);
       categoryModelList = models;
       _tabController = TabController(length: models.length, vsync: this);
     });
@@ -129,12 +137,17 @@ class _HomeRouteState extends State<HomeRoute>
           return Container(child: WebviewScaffold(
             url: 'www.qq.com', //model.url,
             withJavascript: true,
-            // appBar: AppBar(
-            //   title: Text('WebView'),
-            // ),
+            appBar: AppBar(
+              title: Text('WebView'),
+            ),
           ),
-          height: 300.0,);
-        default: return HomeDetailRoute();
+          height: 100.0,);
+        default: return HomeDetailRoute(categoryId: model.categoryId ?? -2, bgAlphaBolck: (alpha){
+          // setState(() {
+          //   _tabBarBgAlpha = alpha;
+          //   _isTabBarOverAlpha = alpha < 50.0;
+          // });
+        },);
       }
     }).toList();
   }
