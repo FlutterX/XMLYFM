@@ -8,12 +8,11 @@ class DetailTitleMore extends StatelessWidget {
     Widget build(BuildContext context) {
       return Container(
             height: 50.0,
-            color: Colors.yellow,
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 15.0),
+              padding: EdgeInsets.symmetric(horizontal: 10.0),
               child: Row(
                 children: <Widget>[
-                  Expanded( child: Text(title, style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),)),
+                  Expanded( child: Text(title, style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w900),)),
                   InkWell(
                     child: Text('更多'),
                   ),
