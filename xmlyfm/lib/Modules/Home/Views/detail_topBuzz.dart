@@ -11,52 +11,59 @@ class DetailTopBuzz extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 10.0),
-          child: Container(
-            height: 40.0,
-            child: Row(
-              children: <Widget>[
-                Text(
-                  model.title,
-                  style: TextStyle(
-                      color: themeColor,
-                      fontSize: 16.0,
-                      fontWeight: FontWeight.bold),
-                ),
-                Expanded(
-                  child: Swiper(
-                    autoplayDelay: 3000,
-                    autoplay: true,
-                    scrollDirection: Axis.vertical,
-                    itemCount: model.list.length,
-                    itemBuilder: (ctx, index) {
-                      return Padding(
-                        padding: EdgeInsets.all(10.0),
-                        child: Text(
-                          model.list[index].title,
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 1,
-                        ),
-                      );
-                    },
+    return DecoratedBox(
+      decoration: BoxDecoration(color: Colors.white),
+      child: Column(
+        children: <Widget>[
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 10.0),
+            child: Container(
+              height: 40.0,
+              child: Row(
+                children: <Widget>[
+                  Text(
+                    model.title,
+                    style: TextStyle(
+                        color: themeColor,
+                        fontSize: 16.0,
+                        fontWeight: FontWeight.bold),
                   ),
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 11.0),
-                  child: Container(width: 1, color: Colors.grey.withAlpha(100),),
-                ),
-                InkWell(
-                  child: Text('更多'),
-                ),
-              ],
+                  Expanded(
+                    child: Swiper(
+                      autoplayDelay: 3000,
+                      autoplay: true,
+                      scrollDirection: Axis.vertical,
+                      itemCount: model.list.length,
+                      itemBuilder: (ctx, index) {
+                        return Padding(
+                          padding: EdgeInsets.all(10.0),
+                          child: Text(
+                            model.list[index].title,
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                  Padding(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 10.0, vertical: 11.0),
+                    child: Container(
+                      width: 1,
+                      color: Colors.grey.withAlpha(100),
+                    ),
+                  ),
+                  InkWell(
+                    child: Text('更多'),
+                  ),
+                ],
+              ),
             ),
           ),
-        ),
-        DetailBottomLine()
-      ],
+          DetailBottomLine()
+        ],
+      ),
     );
   }
 }
