@@ -21,12 +21,18 @@ enum HomeDetailType {
   RecommendAlbum
 }
 
+enum DetailCategoriesDirection {
+  Column,
+  Row
+}
+
 @JsonSerializable()
 class HomeDetail {
   HomeDetail(
     this.bottomHasMore, 
     this.hasMore, 
     this.list, 
+    this.isNewUser,
     this.loopCount,
     this.moduleId,
     this.moduleType,
@@ -70,6 +76,13 @@ class HomeDetail {
       case "ad": return HomeDetailType.Ad;
       case "recommendAlbum": return HomeDetailType.RecommendAlbum;
       default: return HomeDetailType.RecommendAlbum;
+    }
+  }
+  DetailCategoriesDirection fetchCategoriesDirection() {
+    switch (direction) {
+      case "column" : return DetailCategoriesDirection.Column;
+      case "row" : return DetailCategoriesDirection.Row;
+      default: return DetailCategoriesDirection.Column;
     }
   }
 }

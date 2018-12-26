@@ -15,6 +15,7 @@ HomeDetail _$HomeDetailFromJson(Map<String, dynamic> json) {
               ? null
               : HomeDetailList.fromJson(e as Map<String, dynamic>))
           ?.toList(),
+      json['isNewUser'] as bool,
       json['loopCount'] as int,
       json['moduleId'] as int,
       json['moduleType'] as String,
@@ -26,8 +27,7 @@ HomeDetail _$HomeDetailFromJson(Map<String, dynamic> json) {
           ?.map((e) => e == null
               ? null
               : HomeDetailKeyword.fromJson(e as Map<String, dynamic>))
-          ?.toList())
-    ..isNewUser = json['isNewUser'] as bool;
+          ?.toList());
 }
 
 Map<String, dynamic> _$HomeDetailToJson(HomeDetail instance) =>
