@@ -3,10 +3,8 @@ import 'package:xmlyfm/Modules/Home/home_route.dart';
 import 'package:xmlyfm/Modules/Listen/listen_route.dart';
 import 'package:xmlyfm/Modules/Find/find_route.dart';
 import 'package:xmlyfm/Modules/Me/me_route.dart';
-import 'dart:math' as math;
 import 'Modules/Basic/tab_bar.dart';
 
-const double _kBottomMargin = 8.0;
 void main() => runApp(MainApp());
 
 class MainApp extends StatefulWidget {
@@ -51,7 +49,9 @@ class _MainAppState extends State<MainApp> with SingleTickerProviderStateMixin {
     return MaterialApp(
       title: '喜马拉雅FM APP',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.red,
+        primaryColor: Colors.white,
+        brightness: Brightness.light
       ),
       home: Scaffold(
           body: _bodys.elementAt(_tabIndex),
