@@ -5,6 +5,7 @@ import 'Model/home_category_item.dart';
 import 'Views/home_search.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 import 'home_detail_route.dart';
+import 'package:xmlyfm/Configs/configs.dart';
 
 class HomeRoute extends StatefulWidget {
   @override
@@ -27,11 +28,12 @@ class _HomeRouteState extends State<HomeRoute>
   @override
     void dispose() {
       _tabController.dispose();
-      super.dispose();
+      super.dispose(); 
     }
 
   @override
   Widget build(BuildContext context) {
+    0 >= 2;
     return Scaffold(
       body: Stack( fit: StackFit.expand,
       children: <Widget>[
@@ -69,14 +71,12 @@ class _HomeRouteState extends State<HomeRoute>
                               child: TabBar(
                                 controller: _tabController,
                                 isScrollable: true,
-                                indicatorColor: _isTabBarOverAlpha ? Colors.black : Colors.white,
+                                indicatorColor: _isTabBarOverAlpha ? themeColor : Colors.white,
                                 indicatorSize: TabBarIndicatorSize.label,
-                                labelStyle: TextStyle(
-                                    color: _isTabBarOverAlpha ? Colors.black : Colors.white,
-                                    fontSize: 20.0,
-                                    fontWeight: FontWeight.bold),
-                                unselectedLabelStyle: TextStyle(
-                                    color: _isTabBarOverAlpha ? Colors.black : Color(0xFFF9F9F9), fontSize: 13.0),
+                                labelColor: _isTabBarOverAlpha ? Colors.black : Colors.white,
+                                unselectedLabelColor: _isTabBarOverAlpha ? Colors.black : Color(0xFFF9F9F9),
+                                labelStyle: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+                                unselectedLabelStyle: TextStyle(fontSize: 13.0), // Color(0xFFF9F9F9)
                                 tabs: categoryModelList.map((model) {
                                   return Tab(
                                     text: model.title,
@@ -84,10 +84,9 @@ class _HomeRouteState extends State<HomeRoute>
                                 }).toList(),
                               ),
                             ),
-                            Center(
-                                child: Padding(
+                            Center(child: Padding(
                               padding: EdgeInsets.symmetric(horizontal: 10.0),
-                              child: Icon(Icons.table_chart, color: Colors.white,),
+                              child: Icon(Icons.table_chart, color: _isTabBarOverAlpha ? themeColor : Colors.white,),
                             )),
                           ],
                   ),
@@ -143,12 +142,13 @@ class _HomeRouteState extends State<HomeRoute>
           ),
           height: 100.0,);
         default: return HomeDetailRoute(categoryId: model.categoryId ?? -2, bgAlphaBolck: (alpha){
-          // setState(() {
-          //   _tabBarBgAlpha = alpha;
-          //   _isTabBarOverAlpha = alpha < 50.0;
-          // });
+          setState(() {
+            _tabBarBgAlpha = alpha;
+            _isTabBarOverAlpha = alpha < 50.0;
+          });
         },);
       }
     }).toList();
   }
 }
+
