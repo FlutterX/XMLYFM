@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:xmlyfm/Modules/Home/Model/home_detail_list.dart';
+import 'package:flutter_fitsize/flutter_fitsize.dart';
 
 class DetailSquare extends StatelessWidget {
   DetailSquare(this.models) : assert(models != null);
@@ -13,8 +14,8 @@ class DetailSquare extends StatelessWidget {
       sliver: SliverGrid(
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 5, // Grid按五列显示
-          mainAxisSpacing: 10.0,
-          crossAxisSpacing: 10.0,
+          mainAxisSpacing: fs>10.0,
+          crossAxisSpacing: fs>10.0,
           childAspectRatio: 1.0,
         ),
         delegate: SliverChildBuilderDelegate((context, index) {
@@ -22,7 +23,7 @@ class DetailSquare extends StatelessWidget {
           return Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Image.network(models[index].coverPath, width: 40.0),
+                Image.network(models[index].coverPath, width: fs>>40.0),
                 Padding(
                   padding: EdgeInsets.only(top: 5.0),
                   child: Text(
@@ -30,7 +31,7 @@ class DetailSquare extends StatelessWidget {
                     style: TextStyle(
                         color: Colors.black54,
                         fontWeight: FontWeight.bold,
-                        fontSize: 13.0),
+                        fontSize: fs>>11.0),
                   ),
                 )
               ],

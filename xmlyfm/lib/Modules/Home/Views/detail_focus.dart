@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:xmlyfm/Modules/Home/Model/home_detail_list.dart';
+import 'package:flutter_fitsize/flutter_fitsize.dart';
 
 class DetailFocus extends StatelessWidget {
   DetailFocus(this.models) : assert(models != null);
@@ -11,7 +12,7 @@ class DetailFocus extends StatelessWidget {
   Widget build(BuildContext context) {
     return ConstrainedBox(
       constraints:
-          BoxConstraints.loose(Size(MediaQuery.of(context).size.width, 200.0)),
+          BoxConstraints.loose(Size(MediaQuery.of(context).size.width, fs>>180.0)),
       child: Swiper(
         autoplay: true,
         itemCount: models.length,
@@ -27,8 +28,8 @@ class DetailFocus extends StatelessWidget {
                     color: Colors.black.withAlpha(15),
                     borderRadius: BorderRadius.circular(5.0)),
                 child: DotSwiperPaginationBuilder(
-                        size: 5.0,
-                        activeSize: 7.0,
+                        size: fs(5.0),
+                        activeSize: fs(7.0),
                         color: Colors.grey,
                         activeColor: Colors.white)
                     .build(context, config),

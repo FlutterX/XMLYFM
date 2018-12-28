@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'Header/me_header.dart';
 import 'Cell/me_cell.dart';
+import 'package:flutter_fitsize/flutter_fitsize.dart';
 
 class MeRoute extends StatefulWidget {
   @override
@@ -104,7 +105,7 @@ class _MeRouteState extends State<MeRoute> {
   // 创建list
   Widget createSliverList(Map<String, MeCellConfig> datas) {
     return SliverFixedExtentList(
-      itemExtent: 50.0, // 行高
+      itemExtent: fs>50.0, // 行高
       delegate: SliverChildBuilderDelegate((context, index) {
         return Container(
           // color: Colors.redAccent,
@@ -132,7 +133,7 @@ class _MeRouteState extends State<MeRoute> {
       child: Container(
         decoration: BoxDecoration(color: Color(0xFFF3F4F5)),
         child: Container(
-          height: 8.0,
+          height: fs>8.0,
         ),
       ),
     );

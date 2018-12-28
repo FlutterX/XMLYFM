@@ -6,6 +6,7 @@ import 'Views/home_search.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 import 'home_detail_route.dart';
 import 'package:xmlyfm/Configs/configs.dart';
+import 'package:flutter_fitsize/flutter_fitsize.dart';
 
 class HomeRoute extends StatefulWidget {
   @override
@@ -33,7 +34,7 @@ class _HomeRouteState extends State<HomeRoute>
 
   @override
   Widget build(BuildContext context) {
-    0 >= 2;
+    final statusBarHeight = MediaQuery.of(context).padding.top;
     return Scaffold(
       body: Stack( fit: StackFit.expand,
       children: <Widget>[
@@ -44,12 +45,12 @@ class _HomeRouteState extends State<HomeRoute>
             child: Container(
               // color: Colors.red,
               color: Colors.white,
-              height: 260.0 + kTextTabBarHeight,
+              height: fs(260.0) + statusBarHeight,
             )),
         Positioned(
             left: .0,
             right: .0,
-            height: kTextTabBarHeight + 200.0,
+            height: statusBarHeight + fs(200.0),
             child: Container(
               // color: Colors.blue,
               color: Color(0xFFB1A383).withAlpha(_tabBarBgAlpha),
@@ -59,9 +60,9 @@ class _HomeRouteState extends State<HomeRoute>
           child: Column(
             children: <Widget>[
               Padding(
-                padding: EdgeInsets.only(top: kTextTabBarHeight),
+                padding: EdgeInsets.only(top: statusBarHeight),
                 child: Container(
-                  height: 50.0,
+                  height: fs>50.0,
                   decoration: BoxDecoration(color: Colors.transparent),
                   child: Row(
                     children: _tabController == null
@@ -75,8 +76,8 @@ class _HomeRouteState extends State<HomeRoute>
                                 indicatorSize: TabBarIndicatorSize.label,
                                 labelColor: _isTabBarOverAlpha ? Colors.black : Colors.white,
                                 unselectedLabelColor: _isTabBarOverAlpha ? Colors.black : Color(0xFFF9F9F9),
-                                labelStyle: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
-                                unselectedLabelStyle: TextStyle(fontSize: 13.0), // Color(0xFFF9F9F9)
+                                labelStyle: TextStyle(fontSize: fs>20.0, fontWeight: FontWeight.bold),
+                                unselectedLabelStyle: TextStyle(fontSize: fs>15.0), // Color(0xFFF9F9F9)
                                 tabs: categoryModelList.map((model) {
                                   return Tab(
                                     text: model.title,
@@ -92,7 +93,7 @@ class _HomeRouteState extends State<HomeRoute>
                   ),
                 ),
               ),
-              HomeSearch(),
+              HomeSearch(isTabBarOverAlpha: _isTabBarOverAlpha,),
               _tabController == null
                   ? Container()
                   : Expanded(

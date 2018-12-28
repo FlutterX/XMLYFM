@@ -4,7 +4,7 @@ import 'detail_title_more.dart';
 import 'detail_refresh.dart';
 import 'detail_bottom_line.dart';
 import 'package:xmlyfm/Modules/Basic/ft_collection_view.dart';
-import 'package:xmlyfm/Configs/configs.dart';
+import 'package:flutter_fitsize/flutter_fitsize.dart';
 
 class DetailOneKeyListen extends StatelessWidget {
   DetailOneKeyListen(this.model) : assert(model != null);
@@ -29,9 +29,9 @@ class DetailOneKeyListen extends StatelessWidget {
                 return Center(child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    Image.network(item.coverRound ?? "", width: 80.0,),
-                    Container(height: 5.0,),
-                    Text(item.channelName ?? "", style: TextStyle(color: Color(0xFF9F9F9F), fontSize: 13.0, fontWeight: FontWeight.bold)),
+                    Image.network(item.coverRound ?? "", width: fs>80.0,),
+                    Container(height: fs>5.0,),
+                    Text(item.channelName ?? "", style: TextStyle(color: Color(0xFF9F9F9F), fontSize: fs>13.0, fontWeight: FontWeight.bold)),
                   ],
                 ),);
               },

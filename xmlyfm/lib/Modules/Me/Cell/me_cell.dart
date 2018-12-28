@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_fitsize/flutter_fitsize.dart';
 
 enum MeCellType {
   Switch,
@@ -39,7 +40,7 @@ class MeCell extends StatelessWidget {
                 padding: EdgeInsets.only(left: 10.0),
                 child: Text(
                   title,
-                  style: TextStyle(fontSize: 15.0, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: fs>15.0, fontWeight: FontWeight.bold),
                 ),
               ),
               Expanded(
@@ -75,7 +76,7 @@ class MeCell extends StatelessWidget {
           textDirection: TextDirection.rtl, 
           children: <Widget>[
             arrow, 
-            Text(config.urlTitle, style: TextStyle(color: Color(0xFFFF5731), fontWeight: FontWeight.bold, fontSize: 13.0),)
+            Text(config.urlTitle, style: TextStyle(color: Color(0xFFFF5731), fontWeight: FontWeight.bold, fontSize: fs>13.0),)
           ]
         );
       default:

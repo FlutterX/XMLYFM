@@ -5,6 +5,7 @@ import 'detail_refresh.dart';
 import 'detail_bottom_line.dart';
 import 'package:xmlyfm/Modules/Basic/ft_collection_view.dart';
 import 'detail_categoriesForShort.dart';
+import 'package:flutter_fitsize/flutter_fitsize.dart';
 
 class DetailCategoriesForLong extends StatelessWidget {
   DetailCategoriesForLong(this.model) : assert(model != null);
@@ -15,7 +16,12 @@ class DetailCategoriesForLong extends StatelessWidget {
     Widget build(BuildContext context) {
       switch (model.fetchCategoriesDirection()) {
         case DetailCategoriesDirection.Column: return DetailCategoriesForShort(model);
-        default: 
+        default:
+        final itemSpacing = 10.0;
+        final columnNum = 3;
+        final padding = EdgeInsets.symmetric(horizontal: 10.0);
+        final itemImageWH = (MediaQuery.of(context).size.width - padding.horizontal - (columnNum-1) * itemSpacing) / columnNum;
+
         final keywords = model.keywords.length > 4 ? model.keywords.sublist(0, 4): model.keywords.sublist(0);
         return Container(
         color: Colors.white,
@@ -33,12 +39,12 @@ class DetailCategoriesForLong extends StatelessWidget {
                   return DecoratedBox(
                     decoration: BoxDecoration(
                           border: Border.all(color: Colors.grey),
-                          borderRadius: BorderRadius.circular(20.0),
+                          borderRadius: BorderRadius.circular(fs>20.0),
                           color: Colors.white
                         ),
                     child: Padding(
-                          padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 15.0),
-                          child: Text(item.keywordName),
+                          padding: EdgeInsets.symmetric(vertical: fs>8.0, horizontal: fs>15.0),
+                          child: Text(item.keywordName, style: TextStyle(fontSize: fs>14.0)),
                         ),
                   );
                 }).toList()
@@ -47,10 +53,10 @@ class DetailCategoriesForLong extends StatelessWidget {
             // x宫格
             FTCollectionView(
               itemCount: model.list.length,
-              columnNum: 3,
-              itemSpacing: 10.0,
+              columnNum: columnNum,
+              itemSpacing: itemSpacing,
               lineSpacing: 10.0,
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
+              padding: padding,
               builder: (context, index) {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -59,7 +65,7 @@ class DetailCategoriesForLong extends StatelessWidget {
                       borderRadius: BorderRadius.circular(4.0),
                       child: Stack(
                         children: <Widget>[
-                          Image.network(model.list[index].pic,),
+                          Image.network(model.list[index].pic, fit: BoxFit.fill, width: itemImageWH, height: itemImageWH,),
                           Positioned(bottom: 0, right: 0, left: 0,
                             child: DecoratedBox(
                               decoration: BoxDecoration(
@@ -69,10 +75,10 @@ class DetailCategoriesForLong extends StatelessWidget {
                                       end: Alignment.topCenter)),
                               child: Row(
                                 children: <Widget>[
-                                  Icon(Icons.play_arrow, color: Colors.white, size: 17,),
+                                  Icon(Icons.play_arrow, color: Colors.white, size: fs>17,),
                                   Text(
                                     "${model.list[index].playsCount}",
-                                    style: TextStyle(color: Colors.white, fontSize: 13.0,)
+                                    style: TextStyle(color: Colors.white, fontSize: fs>13.0,)
                                   )
                                 ],
                               ),
@@ -81,9 +87,9 @@ class DetailCategoriesForLong extends StatelessWidget {
                         ],
                       ),
                     ),
-                    Container(height: 8.0,),
-                    Text(model.list[index].title, maxLines: 1, overflow: TextOverflow.ellipsis, style: TextStyle(color: Colors.black, fontSize: 18.0, fontWeight: FontWeight.bold,)),
-                    Text(model.list[index].subtitle, maxLines: 2, overflow: TextOverflow.ellipsis, style: TextStyle(color: Color(0xFF9F9F9F), fontSize: 13.0))
+                    Container(height: fs>8.0,),
+                    Text(model.list[index].title, maxLines: 1, overflow: TextOverflow.ellipsis, style: TextStyle(color: Colors.black, fontSize: fs>18.0, fontWeight: FontWeight.bold,)),
+                    Text(model.list[index].subtitle, maxLines: 2, overflow: TextOverflow.ellipsis, style: TextStyle(color: Color(0xFF9F9F9F), fontSize: fs>13.0))
                   ],
                 );
               },

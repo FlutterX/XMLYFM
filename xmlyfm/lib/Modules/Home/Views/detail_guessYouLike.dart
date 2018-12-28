@@ -4,14 +4,19 @@ import 'detail_title_more.dart';
 import 'detail_refresh.dart';
 import 'detail_bottom_line.dart';
 import 'package:xmlyfm/Modules/Basic/ft_collection_view.dart';
+import 'package:flutter_fitsize/flutter_fitsize.dart';
 
 class DetailGuessYouLike extends StatelessWidget {
   DetailGuessYouLike(this.model) : assert(model != null);
 
   final HomeDetail model;
+  final itemSpacing = 10.0;
+  final columnNum = 3;
+  final padding = EdgeInsets.symmetric(horizontal: 10.0);
 
   @override
   Widget build(BuildContext context) {
+    final itemImageWH = (MediaQuery.of(context).size.width - padding.horizontal - (columnNum-1) * itemSpacing) / columnNum;
     return Container(
         color: Colors.white,
         child: Column(
@@ -20,8 +25,8 @@ class DetailGuessYouLike extends StatelessWidget {
             // x宫格
             FTCollectionView(
               itemCount: model.list.length,
-              columnNum: 3,
-              itemSpacing: 10.0,
+              columnNum: columnNum,
+              itemSpacing: itemSpacing,
               lineSpacing: 10.0,
               padding: EdgeInsets.symmetric(horizontal: 10.0),
               builder: (context, index) {
@@ -32,7 +37,7 @@ class DetailGuessYouLike extends StatelessWidget {
                       borderRadius: BorderRadius.circular(4.0),
                       child: Stack(
                         children: <Widget>[
-                          Image.network(model.list[index].pic,),
+                          Image.network(model.list[index].pic, fit: BoxFit.fill, width: itemImageWH, height: itemImageWH,),
                           Positioned(bottom: 0, right: 0, left: 0,
                             child: DecoratedBox(
                               decoration: BoxDecoration(
@@ -42,10 +47,10 @@ class DetailGuessYouLike extends StatelessWidget {
                                       end: Alignment.topCenter)),
                               child: Row(
                                 children: <Widget>[
-                                  Icon(Icons.play_arrow, color: Colors.white, size: 17,),
+                                  Icon(Icons.play_arrow, color: Colors.white, size: fs>17,),
                                   Text(
                                     "${model.list[index].playsCount ?? 0}",
-                                    style: TextStyle(color: Colors.white, fontSize: 13.0,)
+                                    style: TextStyle(color: Colors.white, fontSize: fs>13.0,)
                                   )
                                 ],
                               ),
@@ -54,7 +59,7 @@ class DetailGuessYouLike extends StatelessWidget {
                         ],
                       ),
                     ),
-                    Text(model.list[index].title, maxLines: 2)
+                    Text(model.list[index].title, maxLines: 2, style: TextStyle(fontSize: fs>15.0),)
                   ],
                 );
               },

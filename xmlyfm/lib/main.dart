@@ -4,6 +4,7 @@ import 'package:xmlyfm/Modules/Listen/listen_route.dart';
 import 'package:xmlyfm/Modules/Find/find_route.dart';
 import 'package:xmlyfm/Modules/Me/me_route.dart';
 import 'Modules/Basic/tab_bar.dart';
+import 'package:flutter_fitsize/flutter_fitsize.dart';
 
 void main() => runApp(MainApp());
 
@@ -28,6 +29,7 @@ class _MainAppState extends State<MainApp> with SingleTickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
+    fs.setup(padFitMultiple: 0.5);
     _tabImages = [
       fetchTabImage('host_home_page_tab_01.png'),
       fetchTabImage('host_my_listen_tab_01.png'),
@@ -49,12 +51,15 @@ class _MainAppState extends State<MainApp> with SingleTickerProviderStateMixin {
     return MaterialApp(
       title: '喜马拉雅FM APP',
       theme: ThemeData(
-        primarySwatch: Colors.red,
+        // primarySwatch: Colors.red,
         primaryColor: Colors.white,
-        brightness: Brightness.light
+        // brightness: Brightness.light
       ),
       home: Scaffold(
-          body: _bodys.elementAt(_tabIndex),
+          body: IndexedStack(
+            children: _bodys,
+            index: _tabIndex,
+          ),
           bottomNavigationBar: LXFTabBar(
             currentIndex: _tabIndex,
             items: _tabImages

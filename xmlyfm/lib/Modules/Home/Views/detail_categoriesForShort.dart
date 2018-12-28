@@ -5,6 +5,7 @@ import 'detail_refresh.dart';
 import 'detail_bottom_line.dart';
 import 'package:xmlyfm/Modules/Basic/ft_collection_view.dart';
 import 'package:xmlyfm/Configs/configs.dart';
+import 'package:flutter_fitsize/flutter_fitsize.dart';
 
 class DetailCategoriesForShort extends StatelessWidget {
   DetailCategoriesForShort(this.model) : assert(model != null);
@@ -13,7 +14,7 @@ class DetailCategoriesForShort extends StatelessWidget {
 
   @override
     Widget build(BuildContext context) {
-      final imgHeight = 80.0;
+      final imgHeight = fs>80.0;
       final keywords = model.keywords.length > 4 ? model.keywords.sublist(0, 4): model.keywords.sublist(0);
 
       return Container(
@@ -32,12 +33,12 @@ class DetailCategoriesForShort extends StatelessWidget {
                   return DecoratedBox(
                     decoration: BoxDecoration(
                           border: Border.all(color: Colors.grey),
-                          borderRadius: BorderRadius.circular(20.0),
+                          borderRadius: BorderRadius.circular(fs>20.0),
                           color: Colors.white
                         ),
                     child: Padding(
-                          padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 15.0),
-                          child: Text(item.keywordName),
+                          padding: EdgeInsets.symmetric(vertical: fs>8.0, horizontal: fs>15.0),
+                          child: Text(item.keywordName, style: TextStyle(fontSize: fs>14.0),),
                         ),
                   );
                 }).toList()
@@ -64,15 +65,15 @@ class DetailCategoriesForShort extends StatelessWidget {
                       child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            Padding(padding: EdgeInsets.only(bottom: 5.0), child: Text(item.title, maxLines: 2, overflow: TextOverflow.ellipsis, style: TextStyle(color: Colors.black, fontSize: 18.0, fontWeight: FontWeight.bold,)),),
-                            Padding(padding: EdgeInsets.only(bottom: 5.0), child: Text(item.subtitle, maxLines: 1, overflow: TextOverflow.ellipsis, style: TextStyle(color: Color(0xFF9F9F9F), fontSize: 15.0),),),
+                            Padding(padding: EdgeInsets.only(bottom: 5.0), child: Text(item.title, maxLines: 2, overflow: TextOverflow.ellipsis, style: TextStyle(color: Colors.black, fontSize: fs>18.0, fontWeight: FontWeight.bold,)),),
+                            Padding(padding: EdgeInsets.only(bottom: 5.0), child: Text(item.subtitle, maxLines: 1, overflow: TextOverflow.ellipsis, style: TextStyle(color: Color(0xFF9F9F9F), fontSize: fs>15.0),),),
                             Padding(padding: EdgeInsets.only(bottom: 5.0), child: Row(
                               children: <Widget>[
-                                Icon(Icons.play_arrow, color: Color(0xFF9C9C9C), size: 20.0),
-                                Text('${item.playsCount ?? 0}', style: TextStyle(color: Color(0xFF9F9F9F), fontSize: 13.0, fontWeight: FontWeight.bold),),
+                                Icon(Icons.play_arrow, color: Color(0xFF9C9C9C), size: fs>20.0),
+                                Text('${item.playsCount ?? 0}', style: TextStyle(color: Color(0xFF9F9F9F), fontSize: fs>13.0, fontWeight: FontWeight.bold),),
                                 Container(width: 15.0,),
-                                Icon(Icons.graphic_eq, color: Color(0xFF9C9C9C), size: 18.0),
-                                Text('${item.tracksCount ?? 0}集', style: TextStyle(color: Color(0xFF9F9F9F), fontSize: 13.0, fontWeight: FontWeight.bold),),
+                                Icon(Icons.graphic_eq, color: Color(0xFF9C9C9C), size: fs>18.0),
+                                Text('${item.tracksCount ?? 0}集', style: TextStyle(color: Color(0xFF9F9F9F), fontSize: fs>13.0, fontWeight: FontWeight.bold),),
                               ],
                             )),
                             Padding(
