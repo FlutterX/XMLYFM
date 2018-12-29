@@ -31,7 +31,7 @@ class DetailSquare extends StatelessWidget {
                     style: TextStyle(
                         color: Colors.black54,
                         fontWeight: FontWeight.bold,
-                        fontSize: fs>>11.0),
+                        fontSize: fs>>10.0),
                   ),
                 )
               ],

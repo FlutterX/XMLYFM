@@ -12,7 +12,7 @@ class DetailFocus extends StatelessWidget {
   Widget build(BuildContext context) {
     return ConstrainedBox(
       constraints:
-          BoxConstraints.loose(Size(MediaQuery.of(context).size.width, fs>>180.0)),
+          BoxConstraints.loose(Size(MediaQuery.of(context).size.width, fs>>160.0)),
       child: Swiper(
         autoplay: true,
         itemCount: models.length,

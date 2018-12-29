@@ -48,7 +48,7 @@ class _MeHeaderState extends State<MeHeader> {
                       '登录后数据不丢失',
                       style: TextStyle(
                           color: Color(0xFFA0A0A0),
-                          fontSize: 13.0,
+                          fontSize: fs>13.0,
                           fontWeight: FontWeight.bold),
                     )
                   ],
