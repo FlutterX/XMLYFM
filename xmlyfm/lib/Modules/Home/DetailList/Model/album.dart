@@ -1,0 +1,82 @@
+import 'package:json_annotation/json_annotation.dart';
+
+part 'album.g.dart';
+
+@JsonSerializable()
+class Album {
+  Album(this.ageLevel, this.albumId, this.authorizedExpireTime, this.authorizedTypeId, this.categoryId, this.contractStatus, this.createdAt, this.freeToPaidStatus, this.freeToPaidTime, this.lastUptrackAt, this.lastUptrackId, this.offlineReason, this.offlineType, this.originalStatus, this.playTimes, this.playTrackId, this.refundSupportType, this.saleScope, this.serialState, this.serializeStatus, this.shareSupportType, this.shares, this.status, this.subscribeCount, this.tracks, this.type, this.uid, this.unReadAlbumCommentCount, this.updatedAt, this.vipFreeType, this.autoStart, this.canInviteListen, this.canShareAndStealListen, this.hasNew, this.hasRecs, this.isAuthorized, this.isDefault, this.isDraft, this.isFavorite, this.isNoCopyright, this.isPaid, this.isPublic, this.isRecordDesc, this.isVerified, this.isVipFree, this.is_default, this.avatarPath, this.categoryName, this.coverLarge, this.coverLargePop, this.coverMiddle, this.coverOrigin, this.coverSmall, this.coverWebLarge, this.customSubTitle, this.customTitle, this.detailCoverPath, this.intro, this.introRich, this.lastUptrackCoverPath, this.lastUptrackTitle, this.nickname, this.other_title, this.recommendReason, this.salePoint, this.salePointPopup, this.shortIntro, this.shortIntroRich, this.tags, this.title);
+
+  int ageLevel;
+  int albumId;
+  int authorizedExpireTime;
+  int authorizedTypeId;
+  int categoryId;
+  int contractStatus;
+  int createdAt;
+  int freeToPaidStatus;
+  int freeToPaidTime;
+  int lastUptrackAt;
+  int lastUptrackId;
+  int offlineReason;
+  int offlineType;
+  int originalStatus;
+  int playTimes;
+  int playTrackId;
+  int refundSupportType;
+  int saleScope;
+  int serialState;
+  int serializeStatus;
+  int shareSupportType;
+  int shares;
+  int status;
+  int subscribeCount;
+  int tracks;
+  int type;
+  int uid;
+  int unReadAlbumCommentCount;
+  int updatedAt;
+  int vipFreeType;
+  bool autoStart;
+  bool canInviteListen;
+  bool canShareAndStealListen;
+  bool hasNew;
+  bool hasRecs;
+  bool isAuthorized;
+  bool isDefault;
+  bool isDraft;
+  bool isFavorite;
+  bool isNoCopyright;
+  bool isPaid;
+  bool isPublic;
+  bool isRecordDesc;
+  bool isVerified;
+  bool isVipFree;
+  bool is_default;
+  String avatarPath;
+  String categoryName;
+  String coverLarge;
+  String coverLargePop;
+  String coverMiddle;
+  String coverOrigin;
+  String coverSmall;
+  String coverWebLarge;
+  String customSubTitle;
+  String customTitle;
+  String detailCoverPath;
+  String intro;
+  String introRich;
+  String lastUptrackCoverPath;
+  String lastUptrackTitle;
+  String nickname;
+  String other_title;
+  String recommendReason;
+  String salePoint;
+  String salePointPopup;
+  String shortIntro;
+  String shortIntroRich;
+  String tags;
+  String title;
+
+  factory Album.fromJson(Map<String, dynamic> json) => _$AlbumFromJson(json);
+  Map<String, dynamic> toJson() => _$AlbumToJson(this);
+}
