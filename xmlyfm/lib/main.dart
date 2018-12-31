@@ -5,6 +5,7 @@ import 'package:xmlyfm/Modules/Find/find_route.dart';
 import 'package:xmlyfm/Modules/Me/me_route.dart';
 import 'Modules/Basic/tab_bar.dart';
 import 'package:flutter_fitsize/flutter_fitsize.dart';
+import 'Configs/Router/xmly_router.dart';
 
 void main() => runApp(MainApp());
 
@@ -29,7 +30,10 @@ class _MainAppState extends State<MainApp> with SingleTickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
+    
+    XMLYRouterHandler.init();
     fs.setup(padFitMultiple: 0.5);
+
     _tabImages = [
       fetchTabImage('host_home_page_tab_01.png'),
       fetchTabImage('host_my_listen_tab_01.png'),
